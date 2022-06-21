@@ -1,0 +1,6 @@
+{application, emacs_indent,
+ [{description, "A tool for indent Erlang source file with Emacs"},
+  {vsn, "1.0.0"},
+  {applications, [kernel, stdlib]},
+  {licenses, ["Apache 2.0"]}
+ ]}.
