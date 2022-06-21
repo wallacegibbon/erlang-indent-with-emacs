@@ -12,7 +12,6 @@ indent_files(TargetDirectory) ->
                                                filelib:wildcard("**/*.*rl", TargetDirectory))).
 
 indent_file(Filename) ->
-    io:format("try indenting ~s with emacs...~n", [Filename]),
     Dirname = filename:dirname(filename:absname(Filename)),
     Basename = filename:basename(Filename),
     EmacsExtensionDir = get_emacs_ext_dir(),
