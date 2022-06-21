@@ -1,15 +1,18 @@
 -module(emacs_indent).
 -export([main/1]).
+-mode(compile).
 
 main([Filename]) -> indent_file(Filename);
 main(["-r", TargetDirectory]) -> indent_files(TargetDirectory);
 main(_) -> io:format("Usage: emacs_indent [FILE] | [-r TARGET_DIRECTORY]~n").
 
+%% TODO: make this parellel
 indent_files(TargetDirectory) ->
-    lists:foreach(fun indent_file/1, lists:map(fun (D) -> TargetDirectory ++ D end,
-                                               filelib:wildcard("**/*.erl", TargetDirectory))).
+    lists:foreach(fun indent_file/1, lists:map(fun (D) -> TargetDirectory ++ "/" ++ D end,
+                                               filelib:wildcard("**/*.*rl", TargetDirectory))).
 
 indent_file(Filename) ->
+    io:format("try indenting ~s with emacs...~n", [Filename]),
     Dirname = filename:dirname(filename:absname(Filename)),
     Basename = filename:basename(Filename),
     EmacsExtensionDir = get_emacs_ext_dir(),
